@@ -1,22 +1,30 @@
 package main
 
 import (
-    "fmt"
-    "log"
+	"fmt"
+	"log"
+	"os"
 
-    "github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/joho/godotenv"
 )
 
 
-
+func LogFatalError(err error ) {
+    log.Fatalf("An Error Occured. Err: %s", err)
+}
 
 
 
 func main() {
 
-	provider := "https://mainnet.infura.io"
+    //Load Client Link/Auth
+    err := godotenv.Load("./client/client.env")
+    if err != nil {LogFatalError(err)}
 
-    client, err := ethclient.Dial(provider)
+    authLink := os.Getenv("PROVIDER_AUTH")
+
+    client, err := ethclient.Dial(authLink)
     if err != nil {
         log.Fatal(err)
     }
@@ -25,5 +33,5 @@ func main() {
     _ = client // we'll use this in the upcoming sections 
 
     fmt.Println("Successfully Ran")
-    log.Println("Success")
+
 }
