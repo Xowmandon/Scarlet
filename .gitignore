@@ -1,0 +1,2 @@
+.env # local environment/user vars
+bin/ # built binaries

@@ -1,0 +1,11 @@
+# Simple DockerFile for Running Generated Bin
+
+FROM ubuntu:latest
+
+WORKDIR /
+
+RUN apt-get update && apt-get install -y ca-certificates
+
+ADD bin /bin/
+
+CMD ["/bin/sh"]
